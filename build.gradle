@@ -1,9 +1,9 @@
 apply plugin: 'java-library'
-apply plugin: 'eclipse'
 
 buildscript { repositories { mavenCentral() }} // needed for google-java-format
 
 apply from: "https://raw.githubusercontent.com/yodaboda/gene-way-shared/master/config.gradle"
+//apply from: "../gene-way-shared/config.gradle"
 
 
 jar {
@@ -16,37 +16,26 @@ jar {
     }
 }
 
+archivesBaseName = "gene-way-domain"
+
 configurations { providedCompile }
 
-ext {
-    ver = [
-        hibernate: '5.4.0.Final',
-        hibernateValidator: '4.1.0.Final', //GWT supports only this version
-        guice: '4.2.2'
-    ]
-}
-
-
 dependencies {
-	compile "org.hibernate:hibernate-entitymanager:$ver.hibernate"
-	implementation "org.hibernate:hibernate-core:$ver.hibernate"
+	api "org.hibernate:hibernate-entitymanager:$ver.hibernate"
+	api "org.hibernate:hibernate-core:$ver.hibernate"
 	implementation "org.hibernate:hibernate-c3p0:$ver.hibernate"
 	implementation 'c3p0:c3p0:0.9.1.2'
 	implementation "org.hibernate:hibernate-validator:$ver.hibernateValidator"
-	implementation "com.google.inject:guice:$ver.guice"
-	implementation "com.google.inject.extensions:guice-persist:$ver.guice"
-		implementation 'org.apache.logging.log4j:log4j-api:2.11.1'
-	implementation 'org.apache.logging.log4j:log4j-core:2.11.1'
-	implementation 'net.sf.opencsv:opencsv:2.3'
+	implementation "org.slf4j:slf4j-log4j12:1.7.25"
 	implementation 'org.mariadb.jdbc:mariadb-java-client:1.1.7'
 	//Change with mariadb since it has GPL 2 license
 	implementation 'mysql:mysql-connector-java:8.0.13'
 	
-	compile 	fileTree(dir: '../gene-way-shared/build/libs', include: ['*.jar'])	
+	//compile 	fileTree(dir: '../gene-way-shared/build/libs', include: ['*.jar'])	
+	implementation 'com.gene-play:gene-way-shared:0.4.7'
 	
 	testImplementation "junit:junit:4.12" 
 	testImplementation 'org.mockito:mockito-core:2.23.0'
-	testImplementation 'org.apache.logging.log4j:log4j-core:2.11.1:tests'	
-	testImplementation "com.google.inject.extensions:guice-testlib:$ver.guice"
 	testImplementation 'org.hamcrest:hamcrest-library:1.3'
+	
 }
