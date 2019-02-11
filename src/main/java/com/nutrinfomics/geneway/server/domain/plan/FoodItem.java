@@ -13,7 +13,7 @@ import com.nutrinfomics.geneway.shared.MeasurementUnit;
 
 @Entity
 public class FoodItem extends EntityBase implements Serializable {
-  private double amount;
+  private float amount;
 
   @Enumerated(EnumType.STRING)
   private MeasurementUnit measurementUnit;
@@ -41,12 +41,12 @@ public class FoodItem extends EntityBase implements Serializable {
     this(0, MeasurementUnit.GRAM, foodType);
   }
 
-  public FoodItem(double amount, MeasurementUnit measurementUnit, FoodItemType foodType) {
+  public FoodItem(float amount, MeasurementUnit measurementUnit, FoodItemType foodType) {
     this(amount, measurementUnit, foodType, new ArbitraryCycle(7));
   }
 
   public FoodItem(
-      double amount, MeasurementUnit measurementUnit, FoodItemType foodType, ArbitraryCycle cycle) {
+      float amount, MeasurementUnit measurementUnit, FoodItemType foodType, ArbitraryCycle cycle) {
     setAmount(amount);
     setMeasurementUnit(measurementUnit);
     setFoodType(foodType);
@@ -56,19 +56,19 @@ public class FoodItem extends EntityBase implements Serializable {
   public FoodItem(String[] data) {
     setFoodType(FoodItemType.valueOf(data[0]));
     setMeasurementUnit(MeasurementUnit.valueOf(data[1]));
-    setAmount(Double.parseDouble(data[2]));
+    setAmount(Float.parseFloat(data[2]));
     getCycle().setCycleLength(Integer.parseInt(data[3]));
   }
 
-  public double getAmount() {
+  public float getAmount() {
     return amount;
   }
 
-  public double getWeeklyNormalizedAmount() {
-    return amount * getCycle().getCycleLength() / 7.0;
+  public float getWeeklyNormalizedAmount() {
+    return amount * getCycle().getCycleLength() / 7.0F;
   }
 
-  public void setAmount(double amount) {
+  public void setAmount(float amount) {
     this.amount = amount;
   }
 
@@ -105,5 +105,11 @@ public class FoodItem extends EntityBase implements Serializable {
 
   public void setCycle(ArbitraryCycle cycle) {
     this.cycle = cycle;
+  }
+  
+  public FoodItem normalize(float normalizingFactor) {
+	  FoodItem normalizedFoodItem = new FoodItem(this.getAmount() * normalizingFactor, this.getMeasurementUnit(),
+			  									this.getFoodType(), new ArbitraryCycle(this.getCycle()));
+	  return normalizedFoodItem;
   }
 }
