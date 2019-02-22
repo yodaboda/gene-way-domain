@@ -1,9 +1,14 @@
-apply plugin: 'java-library'
-
 buildscript { repositories { mavenCentral() }} // needed for google-java-format
 
-apply from: "https://raw.githubusercontent.com/yodaboda/gene-way-shared/master/config.gradle"
-//apply from: "../gene-way-shared/config.gradle"
+
+apply plugin: 'java-library'
+
+
+
+
+//apply from: "https://raw.githubusercontent.com/yodaboda/gene-way-shared/master/config.gradle"
+apply from: "../gene-way-shared/config.gradle"
+
 
 
 jar {
@@ -20,6 +25,8 @@ archivesBaseName = "gene-way-domain"
 
 configurations { providedCompile }
 
+
+
 dependencies {
 	api "org.hibernate:hibernate-entitymanager:$ver.hibernate"
 	api "org.hibernate:hibernate-core:$ver.hibernate"
@@ -31,11 +38,10 @@ dependencies {
 	//Change with mariadb since it has GPL 2 license
 	implementation 'mysql:mysql-connector-java:8.0.13'
 	
-	//compile 	fileTree(dir: '../gene-way-shared/build/libs', include: ['*.jar'])	
-	implementation 'com.gene-play:gene-way-shared:0.4.7'
+	compile 	fileTree(dir: '../gene-way-shared/build/libs', include: ['*.jar'])	
+	//implementation 'com.gene-play:gene-way-shared:0.4.7'
 	
 	testImplementation "junit:junit:4.12" 
 	testImplementation 'org.mockito:mockito-core:2.23.0'
 	testImplementation 'org.hamcrest:hamcrest-library:1.3'
-	
 }
