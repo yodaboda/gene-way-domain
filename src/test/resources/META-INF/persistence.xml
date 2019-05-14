@@ -9,7 +9,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<!-- Set the path to the java classes directory where to auto-detect annotated entities -->
-		<jar-file>file:/Users/firas1/Documents/gene-way-workspace-separate-repos/gene-way-domain/bin/com/nutrinfomics/geneway/server</jar-file>
+		<jar-file>file:/Users/firas1/Documents/gene-way-workspace-separate-repos/gene-way-domain/bin/com/nutrinfomics/geneway/domain</jar-file>
 		
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

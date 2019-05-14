@@ -106,10 +106,14 @@ public class FoodItem extends EntityBase implements Serializable {
   public void setCycle(ArbitraryCycle cycle) {
     this.cycle = cycle;
   }
-  
+
   public FoodItem normalize(float normalizingFactor) {
-	  FoodItem normalizedFoodItem = new FoodItem(this.getAmount() * normalizingFactor, this.getMeasurementUnit(),
-			  									this.getFoodType(), new ArbitraryCycle(this.getCycle()));
-	  return normalizedFoodItem;
+    FoodItem normalizedFoodItem =
+        new FoodItem(
+            this.getAmount() * normalizingFactor,
+            this.getMeasurementUnit(),
+            this.getFoodType(),
+            new ArbitraryCycle(this.getCycle()));
+    return normalizedFoodItem;
   }
 }

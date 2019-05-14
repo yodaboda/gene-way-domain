@@ -10,11 +10,13 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.nutrinfomics.geneway.shared.testcategory.FastTest;
 
+@Ignore
 @Category(value = {FastTest.class})
 public class OffsetDateTimePersistenceConverterTest {
 

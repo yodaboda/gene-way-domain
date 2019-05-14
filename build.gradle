@@ -23,8 +23,10 @@ jar {
 
 archivesBaseName = "gene-way-domain"
 
-configurations { providedCompile }
-
+configurations { 
+	providedCompile
+	glassfishRemoteTestRuntime { extendsFrom testRuntime }
+}
 
 
 dependencies {
@@ -38,10 +40,46 @@ dependencies {
 	//Change with mariadb since it has GPL 2 license
 	implementation 'mysql:mysql-connector-java:8.0.13'
 	
+	
 	compile 	fileTree(dir: '../gene-way-shared/build/libs', include: ['*.jar'])	
 	//implementation 'com.gene-play:gene-way-shared:0.4.7'
 	
-	testImplementation "junit:junit:4.12" 
-	testImplementation 'org.mockito:mockito-core:2.23.0'
-	testImplementation 'org.hamcrest:hamcrest-library:1.3'
+	glassfishRemoteTestRuntime "junit:junit:4.12" 
+	glassfishRemoteTestRuntime 'org.mockito:mockito-core:2.23.0'
+	glassfishRemoteTestRuntime 'javax.persistence:javax.persistence-api:2.2'
+	glassfishRemoteTestRuntime 'javax.validation:validation-api:2.0.1.Final'
+	glassfishRemoteTestRuntime 'javax.inject:javax.inject:1'
+	glassfishRemoteTestRuntime 'javax.transaction:jta:1.1'
+	glassfishRemoteTestRuntime 'org.jboss.arquillian:arquillian-bom:1.4.1.Final'
+	glassfishRemoteTestRuntime 'org.jboss.arquillian.junit:arquillian-junit-container:1.4.1.Final'
+	glassfishRemoteTestRuntime 'org.jboss.arquillian.container:arquillian-container-spi:1.4.1.Final'	
+	glassfishRemoteTestRuntime 'org.jboss.arquillian.container:arquillian-glassfish-remote-3.1:1.0.2'
+	
 }
+
+sourceSets {
+	main.compileClasspath += configurations.providedCompile
+	test.compileClasspath += configurations.providedCompile
+	test.runtimeClasspath += configurations.providedCompile
+	
+	main.compileClasspath += configurations.glassfishRemoteTestRuntime
+	test.compileClasspath += configurations.glassfishRemoteTestRuntime
+	test.runtimeClasspath += configurations.glassfishRemoteTestRuntime
+
+//	test.resources.srcDirs += 'src/test/resources'
+	test.resources.srcDirs += 'src/test/resources-glassfish-remote'	
+}
+
+task glassfishRemoteTest(type: Test) {
+   testClassesDirs = sourceSets.test.output.classesDirs
+   classpath = sourceSets.test.output + sourceSets.main.output + configurations.glassfishRemoteTestRuntime
+}
+
+eclipse {
+	classpath {
+		plusConfigurations += [ configurations.providedCompile ]
+		plusConfigurations += [ configurations.glassfishRemoteTestRuntime ]
+	}
+}
+
+sourceCompatibility = 1.8

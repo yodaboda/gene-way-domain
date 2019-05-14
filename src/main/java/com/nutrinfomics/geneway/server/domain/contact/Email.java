@@ -9,7 +9,9 @@ public class Email extends EntityBase {
   /** */
   private static final long serialVersionUID = -11865244538655550L;
 
-  @org.hibernate.validator.constraints.Email private String address;
+  // TODO: Reactivate
+  // @javax.validation.constraints.Email
+  private String address;
 
   private String description;
 

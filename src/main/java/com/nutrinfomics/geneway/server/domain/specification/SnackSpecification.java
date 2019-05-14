@@ -12,7 +12,6 @@ import com.nutrinfomics.geneway.server.domain.plan.FoodItem;
 import com.nutrinfomics.geneway.shared.FoodItemType;
 import com.nutrinfomics.geneway.shared.specification.FoodSpecification;
 
-
 @Entity
 public class SnackSpecification extends AbstractFoodSpecification {
 
