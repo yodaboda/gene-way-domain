@@ -14,7 +14,6 @@
  * the License.
  */
 
-
 package com.nutrinfomics.geneway.server.domain.plan;
 
 import javax.persistence.CascadeType;

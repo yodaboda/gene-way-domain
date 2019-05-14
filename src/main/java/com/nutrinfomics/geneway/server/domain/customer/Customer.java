@@ -144,7 +144,6 @@ public class Customer extends EntityBase {
   }
 }
 
-
 /*
  * †Dr Firas Swidan, PhD. frsswdn@gmail.com. firas.swidan@icloud.com.
  * https://www.linkedin.com/in/swidan
