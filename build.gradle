@@ -54,8 +54,8 @@ dependencies {
 	implementation "org.slf4j:slf4j-log4j12:1.7.25"
 	implementation 'org.mariadb.jdbc:mariadb-java-client:1.1.7'
 	//Change with mariadb since it has GPL 2 license
-	implementation 'mysql:mysql-connector-java:8.0.13'
-	
+	//implementation 'mysql:mysql-connector-java:8.0.13'
+	implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.1'
 	
 	compile 	fileTree(dir: '../gene-way-shared/build/libs', include: ['*.jar'])	
 	//implementation 'com.gene-play:gene-way-shared:0.4.7'
